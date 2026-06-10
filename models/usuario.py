@@ -1,9 +1,10 @@
 class Usuario:
 
     #Constructor
-    def __init__(self, id_usuario, nombre, email, carrera):
+    def __init__(self, id_usuario, nombre, matricula, email, carrera):
         self.id_usuario = id_usuario
         self.nombre = nombre
+        self.matricula = matricula
         self.email = email
         self.carrera = carrera
         self.activo = True
