@@ -41,3 +41,11 @@ class LibroDAO:
         conexion.commit()
         cursor.close()
         conexion.close()
+
+    def eliminar(self, libro_id):
+        conexion = Conexion.obtener_conexion()
+        cursor = conexion.cursor()
+        cursor.execuete("DELETE FROM libro WHERE id = %s", (libro_id,))
+        conexion.commit()
+        cursor.close()
+        conexion.close()
