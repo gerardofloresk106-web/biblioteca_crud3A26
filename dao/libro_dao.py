@@ -1,5 +1,6 @@
 #DAO: Data Access Objet
 #libro_dao: Objeto de acceso a datos de la tabla libro
+
 from database.conexion import Conexion 
 from models.libro import Libro
 
@@ -9,20 +10,6 @@ class LibroDAO:
     def obtener_todos(self):
         conexion = Conexion.obtener_conexion()
         cursor = conexion.cursor()
-
-
-        sql = """ 
-        SELECT
-            libro.id,
-            libro.titulo,
-            autor.nombre,
-            libro.isbn,
-            libro.disponible
-            FROM libro
-            INNER JOIN autor ON
-            libro.autor = autor.id
-
-            """
 
         cursor.execute("SELECT * FROM vista_libros")
         registros = cursor.fetchall()
@@ -44,14 +31,14 @@ class LibroDAO:
     def insertar(self, libro):
         conexion = Conexion.obtener_conexion()
         cursor = conexion.cursor()
-        sql = """"
-        INSERT INTO libro (titulo, autor, isbn, disponible)
-        VALUES (%s,%s, %s, %s, %s)
+        sql = """
+        INSERT INTO libro (id, titulo, autor, isbn, disponible)
+        VALUES (%s, %s, %s, %s,%s)
         """
-    
         cursor.execute(
             sql, 
-            (libro.titulo,
+            (libro.id,
+             libro.titulo,
              libro.autor,
              libro.isbn,
              libro.disponible
@@ -97,7 +84,7 @@ class LibroDAO:
         cursor.close()
         conexion.close()
 
-    def obtener_ultimo_id(self)
+    def obtener_ultimo_id(self):
         conexion = Conexion.obtener_conexion()
         cursor = conexion.cursor()
 
@@ -108,4 +95,5 @@ class LibroDAO:
         conexion.close()
 
         if resultado is None:
-            return resultado[0]
+            return 0 
+        return resultado [0]
