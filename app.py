@@ -1,6 +1,24 @@
+#import flet as ft
+#from ui.main_window import main_window
 from dao.libro_dao import LibroDAO
 from models.libro import Libro
 from dao.usuario_dao import UsuarioDAO
+
+import flet as ft
+from ui.main_window import MainWindow
+
+def main(page: ft.Page):
+    page.title = "Sistema de Biblioteca 2026"
+    page.window_width = 800
+    page.window_height = 600
+    page.padding = 0
+
+    interfaz = MainWindow(page)
+    menu_visual = interfaz.inicializar_interfaz()
+    page.add(menu_visual)
+
+if __name__ == "__main__":
+    ft.app(target=main)
 
 def ver_libros():
     try:
@@ -307,30 +325,33 @@ def ver_mis_prestamos():
 # 3. MENÚ PRINCIPAL DE ACCESO
 # ==========================================
 def menu_principal():
-    while True:
-        print("\n====== BIENVENIDO A LA BIBLIOTECA ======")
-        print("1. Entrar como Administrador")
-        print("2. Entrar como Usuario")
-        print("3. Salir del sistema")
+     while True:
+         print("\n====== BIENVENIDO A LA BIBLIOTECA ======")
+         print("1. Entrar como Administrador")
+         print("2. Entrar como Usuario")
+         print("3. Salir del sistema")
         
-        try:
-            rol = int(input("\nSelecciona tu tipo de perfil (1-3): "))
-            match rol:
-                case 1:
-                    menu_libros() # Llama a tu menú original
-                case 2:
-                    menu_usuario() # Llama al nuevo menú
-                case 3:
-                    print("¡Sistema cerrado con éxito! Hasta luego.")
-                    break # Termina el programa por completo
-                case _:
-                    print("Opción incorrecta. Elige 1, 2 o 3.")
-        except ValueError:
-            print("Error: Ingresa un número válido.")
+         try:
+             rol = int(input("\nSelecciona tu tipo de perfil (1-3): "))
+             match rol:
+                 case 1:
+                     menu_libros() # Llama a tu menú original
+                 case 2:
+                     menu_usuario() # Llama al nuevo menú
+                 case 3:
+                     print("¡Sistema cerrado con éxito! Hasta luego.")
+                     break # Termina el programa por completo
+                 case _:
+                     print("Opción incorrecta. Elige 1, 2 o 3.")
+         except ValueError:
+             print("Error: Ingresa un número válido.")
 
 
 # ==========================================
 # 4. PUNTO DE ENTRADA ÚNICO
 # ==========================================
+
+# ft.app(target=main)
+
 if __name__ == "__main__":
-    menu_principal() # Arranca siempre desde el selector de roles
+     menu_principal() # Arranca siempre desde el selector de roles
